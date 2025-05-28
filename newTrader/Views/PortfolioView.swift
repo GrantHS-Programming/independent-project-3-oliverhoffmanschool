@@ -2,16 +2,8 @@ import SwiftUI
 
 struct PortfolioView: View {
     @EnvironmentObject private var portfolio: UserPortfolio
-    @State private var selectedTimeRange = TimeRange.day
     @State private var showingPositionDetails: Position?
     @AppStorage("accentColorHex") private var accentColorHex = "#007AFF"
-
-    enum TimeRange: String, CaseIterable {
-        case day = "24H"
-        case week = "1W"
-        case month = "1M"
-        case year = "1Y"
-    }
 
     var totalPositionValue: Double {
         portfolio.positions.reduce(0) { $0 + $1.value }
@@ -25,26 +17,18 @@ struct PortfolioView: View {
                     // Portfolio Stats
                     VStack(spacing: 16) {
                         HStack {
-                            VStack(alignment: .leading) {
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text("Total Value")
-                                    .font(.subheadline)
+                                    .font(.caption)
                                     .foregroundColor(.secondary)
                                 Text(String(format: "$%.2f", portfolio.balance + totalPositionValue))
-                                    .font(.system(size: 34, weight: .bold))
+                                    .font(.system(size: 32, weight: .bold))
                             }
                             Spacer()
-
-                            Picker("Time Range", selection: $selectedTimeRange) {
-                                ForEach(TimeRange.allCases, id: \.self) { range in
-                                    Text(range.rawValue).tag(range)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                            .frame(width: 200)
                         }
 
                         // Portfolio Distribution
-                        HStack {
+                        HStack(spacing: 12) {
                             StatCard(title: "Available", value: portfolio.balance)
                             StatCard(title: "In Positions", value: totalPositionValue)
                         }
@@ -94,10 +78,11 @@ struct StatCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
-                .font(.subheadline)
+                .font(.caption)
                 .foregroundColor(.secondary)
             Text(String(format: "$%.2f", value))
-                .font(.headline)
+                .font(.subheadline)
+                .fontWeight(.semibold)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
@@ -190,4 +175,9 @@ struct DetailRow: View {
                 .fontWeight(.medium)
         }
     }
+}
+
+#Preview{
+    PortfolioView()
+        .environmentObject(UserPortfolio())
 }
