@@ -99,12 +99,13 @@ struct TradeView: View {
                 VStack(spacing: 8) {
                     HStack {
                         Text(selectedAsset.symbol)
-                            .font(.headline)
+                            .font(.system(size: 36, weight: .bold))
                             .foregroundColor(accentColor)
                         Spacer()
                         VStack(alignment: .trailing) {
                             Text(String(format: "$%.2f", currentPrice))
-                                .font(.system(size: 28, weight: .bold))
+                                .font(.system(size: 30, weight: .bold))
+                                .fontWeight(.semibold)
                                 .foregroundColor(accentColor)
                             Text(String(format: "%+.2f%%", priceChange24h))
                                 .font(.subheadline)

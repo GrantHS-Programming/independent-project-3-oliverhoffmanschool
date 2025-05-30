@@ -10,7 +10,7 @@ struct HomeView: View {
                     // Balance Card
                     VStack(spacing: 8) {
                         Text("$\(portfolio.balance, specifier: "%.2f")")
-                            .font(.system(size: 42, weight: .bold))
+                            .font(.system(size: 42, weight: .black))
                             .foregroundColor(.primary)
                         
                         HStack(spacing: 4) {
@@ -59,8 +59,8 @@ struct HoldingCard: View {
                 Text(position.symbol)
                     .font(.headline)
                 Text("\(position.amount, specifier: "%.4f")")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .font(.title)
+                    .foregroundColor(.brown)
             }
             
             Spacer()
@@ -83,6 +83,7 @@ struct HoldingCard: View {
     }
 }
 #Preview {
-    ContentView()
+    HomeView()
+        .environmentObject(UserPortfolio())
 }
  
