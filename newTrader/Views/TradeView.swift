@@ -135,7 +135,7 @@ struct TradeView: View {
                 VStack(spacing: 16) {
                     HStack {
                         Text("Amount:")
-                        TextField("Amount", text: $amount)
+                        TextField("$USD", text: $amount)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(.roundedBorder)
                     }
@@ -147,14 +147,14 @@ struct TradeView: View {
 
                     HStack {
                         Text("Stop Loss:")
-                        TextField("Stop Loss", text: $stopLoss)
+                        TextField("$USD", text: $stopLoss)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(.roundedBorder)
                     }
 
                     HStack {
                         Text("Take Profit:")
-                        TextField("Take Profit", text: $takeProfit)
+                        TextField("$USD", text: $takeProfit)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(.roundedBorder)
                     }
