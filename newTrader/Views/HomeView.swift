@@ -7,7 +7,6 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 24) {
-                    // Balance Card
                     VStack(spacing: 8) {
                         Text("$\(portfolio.balance, specifier: "%.2f")")
                             .font(.system(size: 42, weight: .black))
