@@ -4,6 +4,7 @@ struct RootView: View {
     @AppStorage("theme") private var storedTheme = "System"
     @AppStorage("accentColor") private var accentColorHex = "#007AFF"
     @State private var currentTheme = "System"
+    
 
     var colorScheme: ColorScheme? {
         switch currentTheme {

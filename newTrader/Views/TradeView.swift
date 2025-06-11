@@ -194,14 +194,18 @@ struct TradeView: View {
         .tint(accentColor)
         .task {
             await cryptoService.fetchTopCryptos()
+            
+            // Ensure we select a valid asset after loading
+            if let first = cryptoService.assets.first {
+                selectedAsset = first
+                binanceService.connect(symbol: first.symbol)
+                updatePriceData()
+            }
         }
+
         .onChange(of: selectedAsset) { _, newAsset in
             binanceService.disconnect()
             binanceService.connect(symbol: newAsset.symbol)
-            updatePriceData()
-        }
-        .onAppear {
-            binanceService.connect(symbol: selectedAsset.symbol)
             updatePriceData()
         }
         .onDisappear {
